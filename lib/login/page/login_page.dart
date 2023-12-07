@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/firDay_localizations.dart';
 import 'package:sp_util/sp_util.dart';
 
+import '../../routers/routers.dart';
 import '../login_router.dart';
 
 class LoginPage extends StatefulWidget {
@@ -52,8 +53,8 @@ class _LoginPageState extends State<LoginPage> with ChangeNotifierMixin<LoginPag
   }
 
   _login() {
-    SpUtil.putString(Constant.phone, _phoneController.text);
-    // NavigatorUtils.push(context, StoreRouter.auditPage);
+    // SpUtil.putString(Constant.phone, _phoneController.text);
+    NavigatorUtils.push(context, Routes.home, clearStack: true);
   }
 
   _verify() {
@@ -122,7 +123,8 @@ class _LoginPageState extends State<LoginPage> with ChangeNotifierMixin<LoginPag
         MyButton(
           key: const Key('login'),
           text: FirDayLocalizations.of(context)!.login,
-          onPressed: _clickable ? _login : null,
+          // onPressed: _clickable ? _login : null,
+          onPressed: _login,
         ),
         Container(
           height: 40,
@@ -141,7 +143,7 @@ class _LoginPageState extends State<LoginPage> with ChangeNotifierMixin<LoginPag
           alignment: Alignment.center,
           child: GestureDetector(
             child: Text(
-              FirDayLocalizations.of(context)!.noAccountRegisterLink,
+              "Wed 1 Sep 2021 - In the Office",
               style: TextStyle(color: Theme.of(context).primaryColor),
               key: const Key('noAccountRegister'),
             ),

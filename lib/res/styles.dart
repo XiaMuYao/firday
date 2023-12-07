@@ -4,6 +4,30 @@ import 'colors.dart';
 import 'dimens.dart';
 
 class TextStyles {
+  static const TextStyle textWhite70_16 = TextStyle(
+    inherit: false,
+    fontSize: Dimens.font_sp16,
+    color: Color(0xB3FFFFFF),
+  );
+
+  static const TextStyle textWhite_16 = TextStyle(
+    inherit: false,
+    fontSize: Dimens.font_sp16,
+    color: Colors.white,
+  );
+
+  static const TextStyle texBlack_18 = TextStyle(
+    inherit: false,
+    fontSize: Dimens.font_sp18,
+    color: Colours.textBlackColor,
+  );
+
+  static const TextStyle texBlack_16 = TextStyle(
+    inherit: false,
+    fontSize: Dimens.font_sp16,
+    color: Colours.textBlueColor,
+  );
+
   static const TextStyle textSize12 = TextStyle(
     fontSize: Dimens.font_sp12,
   );
