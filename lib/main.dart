@@ -1,4 +1,4 @@
-import 'package:firday/login/page/login_page.dart';
+import 'package:firday/home/page/home_page.dart';
 import 'package:firday/routers/not_found_page.dart';
 import 'package:firday/routers/routers.dart';
 import 'package:firday/setting/provider/locale_provider.dart';
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
       theme: theme ?? provider.getTheme(),
       darkTheme: provider.getTheme(isDarkMode: true),
       themeMode: provider.getThemeMode(),
-      home: home ?? const LoginPage(),
+      home: home ?? const Home(),
       onGenerateRoute: Routes.router.generator,
       localizationsDelegates: FirDayLocalizations.localizationsDelegates,
       supportedLocales: FirDayLocalizations.supportedLocales,

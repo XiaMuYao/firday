@@ -25,7 +25,7 @@ class TextStyles {
   static const TextStyle texBlack_16 = TextStyle(
     inherit: false,
     fontSize: Dimens.font_sp16,
-    color: Colours.textBlueColor,
+    color: Colours.textBlackColor,
   );
 
   static const TextStyle textSize12 = TextStyle(

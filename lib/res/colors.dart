@@ -50,4 +50,14 @@ class Colours {
 
   static const Color textBlackColor = Color(0xFF20252E);
   static const Color textBlueColor = Color(0xFF1800CC);
+
+  static const Color lineGrey1 = Color(0xFF98ABCC);
+  static const Color lineGrey2 = Color(0xFFC9D3E5);
+
+  static const Color positive = Color(0xFF017970);
+  static const Color negative =  Color(0xFFE6EBF4);
+  static const Color nature =  Color(0xFFFFFFFF);
+
+  static const Color fdPurple =  Color(0xFFA601C2);
+
 }

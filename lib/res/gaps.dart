@@ -1,3 +1,4 @@
+import 'package:firday/res/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'dimens.dart';
@@ -14,6 +15,7 @@ class Gaps {
   static const Widget hGap12 = SizedBox(width: Dimens.gap_dp12);
   static const Widget hGap15 = SizedBox(width: Dimens.gap_dp15);
   static const Widget hGap16 = SizedBox(width: Dimens.gap_dp16);
+  static const Widget hGap22 = SizedBox(width: Dimens.gap_dp22);
   static const Widget hGap32 = SizedBox(width: Dimens.gap_dp32);
 
   /// 垂直间隔
@@ -36,13 +38,27 @@ class Gaps {
 
   static const Widget line = Divider();
 
-  static const Widget vLine = SizedBox(
+  static const Widget v24Line = SizedBox(
     width: 0.6,
     height: 24.0,
     child: VerticalDivider(),
   );
 
   static const Widget empty = SizedBox.shrink();
+
+  static const Widget v1Grey1Line = SizedBox(
+    width: double.infinity,
+    height: 1.0,
+    child: DecoratedBox(
+        decoration: BoxDecoration(color: Colours.lineGrey1), child: Spacer()),
+  );
+
+  static const Widget v1Grey2Line = SizedBox(
+    width: double.infinity,
+    height: 1.0,
+    child: DecoratedBox(
+        decoration: BoxDecoration(color: Colours.lineGrey2), child: Spacer()),
+  );
 
   /// 补充一种空Widget实现 https://github.com/letsar/nil
   /// https://github.com/flutter/flutter/issues/78159

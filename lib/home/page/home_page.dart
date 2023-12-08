@@ -1,9 +1,14 @@
+import 'package:firday/res/gaps.dart';
 import 'package:firday/res/styles.dart';
+import 'package:firday/widgets/desk_action_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import '../../res/colors.dart';
 import '../../widgets/desk_booking_card.dart';
+import '../../widgets/meeting_booking_card.dart';
+import '../../widgets/networking_card.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -15,7 +20,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       /// 显示状态栏和导航栏
@@ -25,18 +29,135 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
+    return Scaffold(
+      backgroundColor: Colours.fdBlue,
+      appBar: const HomeAppBar(),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            const Column(
+              children: [
+                SearchArea(),
+                TimeSwitchBar(),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 124),
+              child: Scrollable(
+                viewportBuilder: (BuildContext context, ViewportOffset position) {
+                  return const SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        DeskBookingInformationCard(),
+                        Gaps.v1Grey1Line,
+                        MeetingBookingInformationCard(),
+                        Gaps.v1Grey2Line,
+                        NetWorkingInformationCard(),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class NetWorkingInformationCard extends StatefulWidget {
+  const NetWorkingInformationCard({super.key});
+
+  @override
+  State<NetWorkingInformationCard> createState() => _NetWorkingInformationCardState();
+}
+
+class _NetWorkingInformationCardState extends State<NetWorkingInformationCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colours.bg1,
+      child: const Column(
         children: [
-          HomeAppBar(),
-          SearchArea(),
-          TimeSwitchBar(),
-          ListView(shrinkWrap: true, children: [
-            const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'),
-          ]),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 20.0, top: 15),
+                child: Text(
+                  "See who’s in Kingswood",
+                  style: TextStyles.texBlack_18,
+                ),
+              ),
+              Spacer(),
+              Padding(
+                padding: EdgeInsets.only(top: 15.0, right: 8),
+                child: Text(
+                  "Networking ",
+                  style: TextStyles.texBlack_16,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 20.0, top: 15),
+                child: FlutterLogo(size: 15),
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 20.0, top: 12, bottom: 24),
+            child: NetWorkingCard(
+              key: Key("homePageNetWorkingCard"),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class MeetingBookingInformationCard extends StatefulWidget {
+  const MeetingBookingInformationCard({super.key});
+
+  @override
+  State<MeetingBookingInformationCard> createState() => _MeetingBookingInformationCardState();
+}
+
+class _MeetingBookingInformationCardState extends State<MeetingBookingInformationCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colours.bg1,
+      child: const Column(
+        children: [
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 20.0, top: 15),
+                child: Text(
+                  "Meeting",
+                  style: TextStyles.texBlack_18,
+                ),
+              ),
+              Spacer(),
+              Padding(
+                padding: EdgeInsets.only(top: 15.0, right: 8),
+                child: Text(
+                  "My Meetings",
+                  style: TextStyles.texBlack_16,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 20.0, top: 15),
+                child: FlutterLogo(size: 15),
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 12, bottom: 24),
+            child: MeetingBookingCard(
+              key: Key("homePageMeetingBookingCard"),
+            ),
+          )
         ],
       ),
     );
@@ -55,7 +176,6 @@ class _DeskBookingInformationCardState extends State<DeskBookingInformationCard>
   Widget build(BuildContext context) {
     return Container(
       color: Colours.bg1,
-      height: 200,
       child: const Column(
         children: [
           Row(
@@ -85,6 +205,10 @@ class _DeskBookingInformationCardState extends State<DeskBookingInformationCard>
             padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 12, bottom: 24),
             child: DeskBookingCard(
               key: Key("homePageDeskBookingCard"),
+              title: "All day booking - WMC00A-GE15",
+              subTitle: "Ground floor (0), Windmill Court",
+              deskActionPositiveType: DeskButtonType.positive,
+              deskActionNegativeType: DeskButtonType.negative,
             ),
           )
         ],
@@ -169,33 +293,37 @@ class SearchArea extends StatelessWidget {
   }
 }
 
-class HomeAppBar extends StatelessWidget {
+class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
       color: Colours.fdBlue,
-      child: Stack(alignment: Alignment.center, children: [
-        Positioned(
-          left: 20,
-          child: FlutterLogo(size: 40),
-        ),
-        Positioned(
-          width: 40,
-          height: 40,
-          child: FlutterLogo(size: 40),
-        ),
-        Positioned(
-          right: 68,
-          child: FlutterLogo(size: 22.5),
-        ),
-        Positioned(
-          right: 20,
-          child: FlutterLogo(size: 22.5),
-        )
-      ]),
+      child: const SafeArea(
+        child: Stack(alignment: Alignment.center, children: [
+          Positioned(
+            left: 20,
+            child: FlutterLogo(size: 40),
+          ),
+          Positioned(
+            width: 40,
+            height: 40,
+            child: FlutterLogo(size: 40),
+          ),
+          Positioned(
+            right: 68,
+            child: FlutterLogo(size: 22.5),
+          ),
+          Positioned(
+            right: 20,
+            child: FlutterLogo(size: 22.5),
+          )
+        ]),
+      ),
     );
   }
+
+  @override
+  Size get preferredSize => Size.fromHeight(50.0);
 }
